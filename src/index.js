@@ -1,3 +1,4 @@
 import './style.css';
+import * as appController from './appController.js';
 
-console.log("Webpack build successfull!");
+window.controller = controller;
