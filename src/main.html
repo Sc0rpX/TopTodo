@@ -1,11 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TopTodo app</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TopTodo - Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    
 </head>
 <body>
-    <h1>Welcome to TopTodo!</h1>
+
+    <header class="top-nav">
+        <div class="nav-brand">
+            TopTodo
+        </div>
+        <div class="nav-actions">
+            <button class="icon-btn">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <img class="profile-pic" alt="User profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF8kzxvqf3QIWIm8bsAMjAxswfREdK7A_pYBkAtBlqRXW6sjRrFiEYSSQjOg9v59eIGK64Np55BAwxvbcmDkL7lDdOYtmrG9UDHQHOZp5OBsTSa4pC4n1tTS4QONdk4TGQxfnAbj_3MCEMl2TPsHCtPHc8vKUid1j9Y0l2nGprXjFW1dE6v5xO3Fb6ilV8clVt41mjp9LBc1TYKEQX4tPcDVXEvCatSRsmaI6q4cR5O0OS7iivy4f7hmxXelOqfZ-jKktNYZzHckM" />
+        </div>
+    </header>
+
+    <div class="layout-wrapper">
+        <aside class="sidebar">
+            <nav class="sidebar-menu">
+                <a href="#" class="menu-item active" data-name="Inbox">
+                    <span class="material-symbols-outlined filled">inbox</span>
+                    <span>Inbox</span>
+                </a>
+                <a href="#" class="menu-item" data-name="Today">
+                    <span class="material-symbols-outlined">today</span>
+                    <span>Today</span>
+                </a>
+                <a href="#" class="menu-item" data-name="Tomorrow">
+                    <span class="material-symbols-outlined">event</span>
+                    <span>Tomorrow</span>
+                </a>
+                <a href="#" class="menu-item" data-name="This week">
+                    <span class="material-symbols-outlined">date_range</span>
+                    <span>This week</span>
+                </a>
+
+                <div class="section-header">
+                    <span class="section-title">Projects</span>
+                    <button class="add-btn">
+                        <span class="material-symbols-outlined">add</span>
+                    </button>
+                </div>
+                
+                <a href="#" class="menu-item" data-name="Editorial Calendar">
+                    Editorial Calendar
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            
+        </main>
+    </div>
+
+    <button class="fab">
+        <span class="material-symbols-outlined fab-icon">add</span>
+    </button>
+
 </body>
 </html>

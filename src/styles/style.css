@@ -1,0 +1,355 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  background-color: #ffffff;
+  color: #1a1c1d;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #454652;
+  font-size: 1.125rem;
+}
+
+/* Material Icons Setup */
+.material-symbols-outlined {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
+  vertical-align: middle;
+}
+.material-symbols-outlined.filled {
+  font-variation-settings: "FILL" 1;
+}
+
+/* --- Top Navigation --- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #f9f9fb;
+  border-bottom: 1px solid #e2e2e4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 32px;
+  z-index: 50;
+}
+
+.nav-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #0b1a7d;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  color: #454652;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background-color: #eeeef0;
+}
+
+.icon-btn:active {
+  opacity: 0.8;
+}
+
+.profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dfe0ff;
+  margin-left: 8px;
+}
+
+/* --- Layout Structure --- */
+.layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 64px; /* Account for fixed header */
+}
+
+/* --- Sidebar Navigation --- */
+.sidebar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 256px;
+  height: calc(100vh - 64px);
+  background-color: #f3f3f5;
+  border-right: 1px solid #e2e2e4;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: #454652;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #ffffff;
+}
+
+.menu-item.active {
+  background-color: #dfe0ff;
+  color: #303c9a;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px 16px 8px;
+}
+
+.section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #c6c5d4;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.add-btn {
+  background: none;
+  border: none;
+  color: #c6c5d4;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.add-btn:hover {
+  color: #0b1a7d;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+  margin-left: 256px;
+  flex: 1;
+  padding: 48px;
+  background-color: #ffffff;
+}
+
+.content-container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 48px;
+}
+
+/* --- Task List --- */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e8e8ea;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-card:hover {
+  border-color: #c6c5d4;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.task-card.completed {
+  opacity: 0.6;
+}
+
+.task-card.completed .task-title {
+  text-decoration: line-through;
+}
+
+.task-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Checkbox Styling */
+.checkbox-container {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #c6c5d4;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.task-card:hover .checkbox-container:not(.checked) {
+  border-color: #0b1a7d;
+}
+
+.checkbox-inner {
+  width: 12px;
+  height: 12px;
+  background-color: #0b1a7d;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.task-card:hover .checkbox-inner:not(.checked) {
+  opacity: 0.1;
+}
+
+.checkbox-container.checked {
+  background-color: #0b1a7d;
+  border-color: #0b1a7d;
+}
+
+.checkbox-container.checked .check-icon {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.task-title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #1a1c1d;
+}
+
+/* --- Badges --- */
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-time {
+  background-color: #e8e8ea;
+  color: #454652;
+}
+
+.badge-high {
+  background-color: #ffdad6;
+  color: #ba1a1a;
+  font-weight: 700;
+}
+
+.badge-medium {
+  background-color: #fff4d6;
+  color: #ba8d1a;
+  font-weight: 700;
+}
+
+.badge-low {
+  background-color: #d6d9ff;
+  color: #1a1dba;
+  font-weight: 700;
+}
+
+.badge-icon {
+  font-size: 10px;
+}
+
+/* --- Floating Action Button --- */
+.fab {
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  width: 56px;
+  height: 56px;
+  background-color: #0b1a7d;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(11, 26, 125, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 50;
+}
+
+.fab:hover {
+  transform: scale(1.1);
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+.fab-icon {
+  font-size: 24px;
+}

@@ -1,12 +1,15 @@
-import Todo from "./todo.js";
-import Project from "./project.js";
+import Todo from "../models/todo.js";
+import Project from "../models/project.js";
 
 // Project holder
 let allProjects = [];
 
-// Initial inbox
+// Initial inboxs
 let inbox = new Project("Inbox");
-allProjects.push(inbox);
+let today = new Project("Today");
+let tomorrow = new Project("Tomorrow");
+let thisWeek = new Project("This week");
+allProjects.push(inbox, today, tomorrow, thisWeek);
 
 export function getProjects() {
     return allProjects;
