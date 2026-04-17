@@ -1,0 +1,257 @@
+
+/* --- Modal Dialog & Backdrop --- */
+dialog.modal-window {
+  width: 100%;
+  max-width: 576px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+  box-shadow: 0px 12px 32px rgba(11, 26, 125, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: none;
+  margin: auto;
+  padding: 0;
+}
+
+dialog.modal-window:not([open]) {
+    display: none !important;
+}
+
+dialog.modal-window::backdrop {
+  background-color: rgba(26, 28, 29, 0.2);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Hide the dialog completely when not open (browser default, but enforced here) */
+/* dialog:not([open]) {
+  display: none;
+} */
+
+.modal-header {
+  padding: 32px 32px 16px 32px;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0b1a7d;
+  letter-spacing: -0.025em;
+}
+
+.modal-subtitle {
+  font-size: 0.875rem;
+  color: #454652;
+  margin-top: 4px;
+}
+
+.modal-form {
+  padding: 0 32px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* --- Form Elements --- */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #454652;
+  margin-left: 4px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+}
+
+.form-control {
+  width: 100%;
+  background-color: #f3f3f5;
+  border: none;
+  border-radius: 8px;
+  padding: 16px;
+  color: #1a1c1d;
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  transition:
+    box-shadow 0.2s,
+    background-color 0.2s;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 2px rgba(11, 26, 125, 0.3);
+}
+
+.form-control::placeholder {
+  color: #767683;
+}
+
+textarea.form-control {
+  resize: none;
+  padding-bottom: 24px;
+}
+
+/* Grouped Inputs (Grid) */
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+select.form-control,
+input[type="date"].form-control {
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 12px 16px 12px 16px;
+}
+
+.input-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #767683;
+  font-size: 1.125rem;
+  pointer-events: none;
+}
+
+/* Priority Toggle Buttons
+.priority-toggle {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background-color: #f3f3f5;
+  border-radius: 12px;
+}
+
+.priority-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  background-color: transparent;
+  color: #454652;
+}
+
+.priority-btn:hover:not(.active) {
+  background-color: #ffffff;
+  color: #0b1a7d;
+}
+
+.priority-btn.active {
+  background-color: #beebe7;
+  color: #224e4b;
+}
+
+.priority-btn.white-bg {
+  background-color: #ffffff;
+} */
+
+/* Priority Toggle Base Styles */
+.priority-toggle {
+  display: flex;
+  gap: 8px;
+  padding: 4px;
+  background-color: #f3f3f5;
+  border-radius: 12px;
+}
+
+/* 1. Visually hide the actual radio circles */
+.visually-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* 2. The Label (Acts as the clickable button) */
+.priority-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: transparent;
+  color: #454652;
+  
+  /* Prevents text highlighting when clicking fast */
+  user-select: none; 
+}
+
+/* 3. Hover state ONLY for buttons that are NOT checked */
+input[type="radio"]:not(:checked) + .priority-btn:hover {
+  background-color: #ffffff;
+  color: #0b1a7d;
+}
+
+/* 4. Active (Checked) state */
+input[type="radio"]:checked + .priority-btn {
+  background-color: #beebe7;
+  color: #224e4b;
+}
+
+/* --- Actions --- */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  padding-top: 16px;
+}
+
+.btn-cancel {
+  background: none;
+  border: none;
+  padding: 12px 24px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #454652;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s;
+}
+
+.btn-cancel:hover {
+  color: #0b1a7d;
+}
+
+.btn-submit {
+  background: linear-gradient(to right, #0b1a7d, #283593);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 10px 15px -3px rgba(11, 26, 125, 0.2);
+  transition: transform 0.2s;
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}

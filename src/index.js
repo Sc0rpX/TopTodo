@@ -7,6 +7,9 @@ window.appController = appController;
 appController.createNewTodo("Wash the car", "Use the good wax", "2026-04-20", "High");
 appController.createNewTodo("Buy groceries", "Milk and eggs", "2026-04-15", "Medium");
 
+appController.createNewTodo("Test the car", "Use the good wax", "2026-04-21", "Low", "Today");
+appController.createNewTodo("Read Kollani", "Milk and eggs", "2026-04-15", "Medium", "Tomorrow");
+
 document.addEventListener('DOMContentLoaded', () => {
     setupUI();
     

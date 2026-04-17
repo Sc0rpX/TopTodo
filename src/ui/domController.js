@@ -1,6 +1,7 @@
 import * as appController from '../core/appController.js'
 import loadMainTemplate from './components/mainTemplate.js'
 import createTaskCard from './components/taskCard.js';
+import getNewTaskDialog from './components/newTaskDialog.js';
 
 function displayTodos(projectName) {
     const todos = appController.getSpecificProject(projectName).todos;
@@ -57,5 +58,18 @@ export function setupUI() {
             taskList.textContent = "";
             displayTodos(currentProject);
         }
+    })
+
+    // New task button
+    const newTaskBtn = document.querySelector('.new-task-btn');
+    newTaskBtn.addEventListener("click", function(){
+        const newTaskDialog = getNewTaskDialog();
+        mainContent.appendChild(newTaskDialog);
+
+        newTaskDialog.showModal();
+
+        newTaskDialog.addEventListener('close', () => {
+            newTaskDialog.remove();
+        })
     })
 }
