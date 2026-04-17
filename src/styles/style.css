@@ -257,6 +257,7 @@ h1 {
   border-radius: 50%;
   opacity: 0;
   transition: opacity 0.2s;
+  pointer-events: none;
 }
 
 .task-card:hover .checkbox-inner:not(.checked) {
@@ -271,6 +272,7 @@ h1 {
 .checkbox-container.checked .check-icon {
   color: #ffffff;
   font-size: 14px;
+  pointer-events: none;
 }
 
 .task-title {

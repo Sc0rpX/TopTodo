@@ -42,4 +42,20 @@ export function setupUI() {
         // Display the todos of the project
         displayTodos(itemName);
     })
+
+    // Mark todos as complete
+    mainContent.addEventListener("click", function(event) {
+        if(event.target.classList.contains('checkbox-container')) {
+            const taskCard = event.target.closest('.task-card');
+            const taskTitle = taskCard.dataset.title;
+            console.log(taskTitle);
+            const currentProject = sidebarMenu.querySelector('.active').dataset.name
+
+            appController.toggleTodoStatus(taskTitle, currentProject);
+
+            const taskList = taskCard.closest('.task-list');
+            taskList.textContent = "";
+            displayTodos(currentProject);
+        }
+    })
 }

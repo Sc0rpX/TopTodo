@@ -8,6 +8,6 @@ export default class Todo {
     }
 
     toggleStatus(){
-        this.completed = this.completed ? false : true;
+        this.completed = !this.completed;
     }
 }

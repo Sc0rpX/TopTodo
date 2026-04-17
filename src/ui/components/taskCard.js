@@ -2,6 +2,11 @@ export default function createTaskCard(todo) {
     // 1. Create main container
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
+    taskCard.dataset.title = todo.title;
+
+    if(todo.completed) {
+        taskCard.classList.add('completed');
+    }
 
     // 2. Create Task Info section
     const taskInfo = document.createElement('div');
@@ -10,11 +15,23 @@ export default function createTaskCard(todo) {
     // Create Checkbox
     const checkboxContainer = document.createElement('div');
     checkboxContainer.className = 'checkbox-container';
+
+    if(todo.completed) {
+        checkboxContainer.classList.add('checked')
+
+        const checkIcon = document.createElement('span');
+        checkIcon.classList.add('material-symbols-outlined', 'check-icon');
+        checkIcon.textContent = 'check';
+
+        checkboxContainer.appendChild(checkIcon);
+    }
+    else {
+        const checkboxInner = document.createElement('div');
+        checkboxInner.className = 'checkbox-inner';
+        
+        checkboxContainer.appendChild(checkboxInner);
+    }
     
-    const checkboxInner = document.createElement('div');
-    checkboxInner.className = 'checkbox-inner';
-    
-    checkboxContainer.appendChild(checkboxInner);
 
     // Create Title
     const taskTitle = document.createElement('h3');
@@ -32,7 +49,13 @@ export default function createTaskCard(todo) {
     // Create Time badge
     const timeBadge = document.createElement('span');
     timeBadge.className = 'badge badge-time';
-    timeBadge.textContent = todo.dueDate;
+
+    if(todo.completed) {
+        timeBadge.textContent = 'Completed'
+    }
+    else{
+        timeBadge.textContent = todo.dueDate;
+    }
 
     // Create Priority badge
     const priorityBadge = document.createElement('span');
