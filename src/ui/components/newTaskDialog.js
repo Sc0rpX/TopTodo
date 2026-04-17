@@ -41,6 +41,7 @@ export default function getNewTaskDialog() {
 
     const titleInput = document.createElement("input");
     titleInput.className = "form-control";
+    titleInput.id = "task-title"
     titleInput.type = "text";
     titleInput.placeholder = "What needs to be done?";
     titleInput.maxLength = 100;
@@ -63,6 +64,7 @@ export default function getNewTaskDialog() {
 
     const descInput = document.createElement("textarea");
     descInput.className = "form-control";
+    descInput.id = "task-desc"
     descInput.rows = 3;
     descInput.placeholder = "Add more details about this task...";
     descInput.maxLength = 350;
@@ -89,6 +91,7 @@ export default function getNewTaskDialog() {
 
     const projectSelect = document.createElement("select");
     projectSelect.className = "form-control";
+    projectSelect.id = "task-project"
 
     const projects = getProjects();
 
@@ -123,6 +126,7 @@ export default function getNewTaskDialog() {
 
     const dateInput = document.createElement("input");
     dateInput.className = "form-control";
+    dateInput.id = "task-date"
     dateInput.type = "date";
 
     dateWrapper.appendChild(dateInput);

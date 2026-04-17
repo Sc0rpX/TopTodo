@@ -3,6 +3,9 @@ import loadMainTemplate from './components/mainTemplate.js'
 import createTaskCard from './components/taskCard.js';
 import getNewTaskDialog from './components/newTaskDialog.js';
 
+const sidebarMenu = document.querySelector(".sidebar-menu");
+const mainContent = document.querySelector('.main-content');
+
 function displayTodos(projectName) {
     const todos = appController.getSpecificProject(projectName).todos;
     const taskList = document.querySelector('.task-list');
@@ -13,11 +16,16 @@ function displayTodos(projectName) {
     });
 }
 
+function refreshMainContaent(projectName) {
+    mainContent.textContent = "";
+    mainContent.appendChild(loadMainTemplate(projectName));
+
+    // Display the todos of the project
+    displayTodos(projectName);
+}
+
 // Change page content by sidebar nav
 export function setupUI() {
-    const sidebarMenu = document.querySelector(".sidebar-menu");
-    const mainContent = document.querySelector('.main-content');
-    
     sidebarMenu.addEventListener("click", function(event) {
         const clickedItem = event.target.closest(".menu-item");
     
@@ -37,11 +45,7 @@ export function setupUI() {
     
         const itemName = clickedItem.dataset.name;
         
-        mainContent.textContent = "";
-        mainContent.appendChild(loadMainTemplate(itemName));
-
-        // Display the todos of the project
-        displayTodos(itemName);
+        refreshMainContaent(itemName);
     })
 
     // Mark todos as complete
@@ -54,9 +58,7 @@ export function setupUI() {
 
             appController.toggleTodoStatus(taskTitle, currentProject);
 
-            const taskList = taskCard.closest('.task-list');
-            taskList.textContent = "";
-            displayTodos(currentProject);
+            refreshMainContaent(currentProject);
         }
     })
 
@@ -70,6 +72,18 @@ export function setupUI() {
 
         newTaskDialog.addEventListener('close', () => {
             newTaskDialog.remove();
+        })
+
+        const createTaskBtn = newTaskDialog.querySelector('.btn-submit');
+        createTaskBtn.addEventListener("click", () => {
+            const title = newTaskDialog.querySelector('#task-title').value;
+            const desc = newTaskDialog.querySelector('#task-desc').value;
+            const date = newTaskDialog.querySelector('#task-date').value;
+            const priority = newTaskDialog.querySelector('input[name="priority"]:checked').value;
+            const project = newTaskDialog.querySelector('#task-project').value;
+
+            appController.createNewTodo(title, desc, date, priority, project);
+            refreshMainContaent(project);
         })
     })
 }
