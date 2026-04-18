@@ -88,5 +88,47 @@ export function toggleTodoStatus(todoTitle, projectName) {
 }
 
 
+// --- Filter Today, Tomorrow and This week ---
+export function getTasksForToday() {
+    const tasks = [];
+
+    allProjects.forEach(project => {
+        project.todos.forEach(task => {
+            if(isToday(parseISO(task.dueDate))) {
+                tasks.push(task);
+            }
+        })
+    });
+
+    return tasks;
+}
+
+export function getTasksForTomorrow() {
+    const tasks = [];
+
+    allProjects.forEach(project => {
+        project.todos.forEach(task => {
+            if(isTomorrow(parseISO(task.dueDate))) {
+                tasks.push(task);
+            }
+        })
+    });
+
+    return tasks;
+}
+
+export function getTasksForThisWeek() {
+    const tasks = [];
+
+    allProjects.forEach(project => {
+        project.todos.forEach(task => {
+            if(isThisWeek(parseISO(task.dueDate))) {
+                tasks.push(task);
+            }
+        })
+    });
+
+    return tasks;
+}
 
 

@@ -6,32 +6,36 @@ import getNewTaskDialog from './components/newTaskDialog.js';
 const sidebarMenu = document.querySelector(".sidebar-menu");
 const mainContent = document.querySelector('.main-content');
 
-function displayTodos(projectName) {
-    const todos = appController.getSpecificProject(projectName).todos;
+function displayTodos(todoArray) {
     const taskList = document.querySelector('.task-list');
 
-    todos.forEach(task => {
+    if (!todoArray || todoArray.length === 0) {
+        return;
+    }
+
+    todoArray.forEach(task => {
         const taskCard = createTaskCard(task);
         taskList.appendChild(taskCard);
     });
 }
 
-function refreshMainContaent(projectName) {
+function refreshMainContaent(projectName, todoArray) {
     mainContent.textContent = "";
     mainContent.appendChild(loadMainTemplate(projectName));
 
     // Display the todos of the project
-    displayTodos(projectName);
+    displayTodos(todoArray);
 }
 
 // Change page content by sidebar nav
 export function setupUI() {
+    // Switch sidebar menus
     sidebarMenu.addEventListener("click", function(event) {
         const clickedItem = event.target.closest(".menu-item");
     
         if (!clickedItem) return;
-    
         event.preventDefault();
+    
         const allItems = sidebarMenu.querySelectorAll('.menu-item');
         allItems.forEach(item => {
             item.classList.remove('active');
@@ -42,10 +46,28 @@ export function setupUI() {
         clickedItem.classList.add('active');
         const activeIcon = clickedItem.querySelector('.material-symbols-outlined');
         if (activeIcon) activeIcon.classList.add('filled');
+
+        let tasksToRender = [];
     
         const itemName = clickedItem.dataset.name;
+
+        if(itemName === "Today") {
+            tasksToRender = appController.getTasksForToday();
+        }
+        else if(itemName === "Tomorrow") {
+            tasksToRender = appController.getTasksForTomorrow();
+        }
+        else if(itemName === "This week") {
+            tasksToRender = appController.getTasksForThisWeek();
+        }
+        else {
+            const project = appController.getSpecificProject(itemName);
+            if (project) {
+                tasksToRender = project.todos;
+            }
+        }
         
-        refreshMainContaent(itemName);
+        refreshMainContaent(itemName, tasksToRender);
     })
 
     // Mark todos as complete
@@ -58,7 +80,8 @@ export function setupUI() {
 
             appController.toggleTodoStatus(taskTitle, currentProject);
 
-            refreshMainContaent(currentProject);
+            const todos = appController.getSpecificProject(currentProject).todos;
+            refreshMainContaent(currentProject, todos);
         }
     })
 
@@ -87,7 +110,8 @@ export function setupUI() {
 
             const currentProject = sidebarMenu.querySelector('.menu-item.active').dataset.name;
             if(currentProject === project) {
-                refreshMainContaent(project);
+                const todos = appController.getSpecificProject(currentProject).todos;
+                refreshMainContaent(project, todos);
             }
         })
     })
