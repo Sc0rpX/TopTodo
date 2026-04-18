@@ -83,7 +83,11 @@ export function setupUI() {
             const project = newTaskDialog.querySelector('#task-project').value;
 
             appController.createNewTodo(title, desc, date, priority, project);
-            refreshMainContaent(project);
+
+            const currentProject = sidebarMenu.querySelector('.menu-item active');
+            if(currentProject === project) {
+                refreshMainContaent(project);
+            }
         })
     })
 }
