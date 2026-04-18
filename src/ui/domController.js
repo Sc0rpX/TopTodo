@@ -74,6 +74,7 @@ export function setupUI() {
             newTaskDialog.remove();
         })
 
+        // Submit Button event
         const createTaskBtn = newTaskDialog.querySelector('.btn-submit');
         createTaskBtn.addEventListener("click", () => {
             const title = newTaskDialog.querySelector('#task-title').value;
@@ -84,7 +85,7 @@ export function setupUI() {
 
             appController.createNewTodo(title, desc, date, priority, project);
 
-            const currentProject = sidebarMenu.querySelector('.menu-item active');
+            const currentProject = sidebarMenu.querySelector('.menu-item.active');
             if(currentProject === project) {
                 refreshMainContaent(project);
             }

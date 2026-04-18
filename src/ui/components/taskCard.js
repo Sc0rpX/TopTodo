@@ -1,3 +1,5 @@
+import { format, parseISO, isToday, isTomorrow } from "date-fns";
+
 export default function createTaskCard(todo) {
     // 1. Create main container
     const taskCard = document.createElement('div');
@@ -54,7 +56,15 @@ export default function createTaskCard(todo) {
         timeBadge.textContent = 'Completed'
     }
     else{
-        timeBadge.textContent = todo.dueDate;
+        if(isToday(parseISO(todo.dueDate))) {
+            timeBadge.textContent = "Today";
+        }
+        else if(isTomorrow(parseISO(todo.dueDate))) {
+            timeBadge.textContent = "Tomorrow";
+        }
+        else {
+            timeBadge.textContent = format(parseISO(todo.dueDate), 	'E, MMM d');
+        }
     }
 
     // Create Priority badge

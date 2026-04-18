@@ -149,13 +149,13 @@ export default function getNewTaskDialog() {
     priorityToggle.className = "priority-toggle";
 
     // Helper function to create radio inputs + labels easily
-    const createPriorityOption = (id, value, text, isChecked) => {
+    const createPriorityOption = (id, text, isChecked) => {
         // Hidden Radio Input
         const radio = document.createElement("input");
         radio.type = "radio";
         radio.id = id;
         radio.name = "priority"; 
-        radio.value = value;
+        radio.value = text;
         radio.className = "visually-hidden";
         if (isChecked) radio.checked = true;
 
@@ -170,9 +170,9 @@ export default function getNewTaskDialog() {
     };
 
     // Create the 3 options (Low is checked by default)
-    createPriorityOption("priority-low", "low", "Low", true);
-    createPriorityOption("priority-medium", "medium", "Medium", false);
-    createPriorityOption("priority-high", "high", "High", false);
+    createPriorityOption("priority-low", "Low", true);
+    createPriorityOption("priority-medium", "Medium", false);
+    createPriorityOption("priority-high", "High", false);
 
     priorityGroup.appendChild(priorityLabel);
     priorityGroup.appendChild(priorityToggle);

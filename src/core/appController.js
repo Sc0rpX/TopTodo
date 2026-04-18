@@ -1,15 +1,13 @@
 import Todo from "../models/todo.js";
 import Project from "../models/project.js";
+import { isToday, isTomorrow, isThisWeek, parseISO } from 'date-fns';
 
 // Project holder
 let allProjects = [];
 
-// Initial inboxs
+// Initial inbox
 let inbox = new Project("Inbox");
-let today = new Project("Today");
-let tomorrow = new Project("Tomorrow");
-let thisWeek = new Project("This week");
-allProjects.push(inbox, today, tomorrow, thisWeek);
+allProjects.push(inbox);
 
 export function getProjects() {
     return allProjects;
