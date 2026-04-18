@@ -8,12 +8,26 @@ export function getProjectInputField() {
     return projectInput;
 }
 
-export function getProjectsLink(projectName) {
-    const projectCard = document.createElement("a");
-    projectCard.href = "#";
-    projectCard.className = "menu-item";
-    projectCard.dataset.name = projectName;
-    projectCard.textContent = projectName;
+export function createProjectMenuItem(projectName) {
+    const menuItem = document.createElement('a');
+    menuItem.href = '#';
+    menuItem.className = 'menu-item';
+    menuItem.dataset.name = projectName;
 
-    return projectCard;
+    const nameSpan = document.createElement('span');
+    nameSpan.className = 'project-name';
+    nameSpan.textContent = projectName;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete-project-btn';
+
+    const iconSpan = document.createElement('span');
+    iconSpan.className = 'material-symbols-outlined';
+    iconSpan.textContent = 'delete';
+
+    deleteBtn.appendChild(iconSpan);
+    menuItem.appendChild(nameSpan);
+    menuItem.appendChild(deleteBtn);
+
+    return menuItem;
 }

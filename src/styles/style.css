@@ -164,7 +164,7 @@ h1 {
   letter-spacing: 0.1em;
 }
 
-.add-btn {
+.add-btn, .delete-project-btn {
   background: none;
   border: none;
   color: #c6c5d4;
@@ -175,9 +175,25 @@ h1 {
   transition: color 0.2s;
 }
 
-.add-btn:hover {
+.add-btn:hover, .delete-project-btn:hover {
   color: #0b1a7d;
 }
+
+.project-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-project-btn {
+  margin-left: auto;
+  opacity: 0;
+}
+
+.menu-item:hover .delete-project-btn {
+  opacity: 1;
+}
+
 
 #project-input {
   padding: 8px 16px;

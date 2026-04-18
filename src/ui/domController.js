@@ -4,7 +4,7 @@ import createTaskCard from "./components/taskCard.js";
 import getNewTaskDialog from "./components/newTaskDialog.js";
 import {
     getProjectInputField,
-    getProjectsLink,
+    createProjectMenuItem,
 } from "./components/projectComponents.js";
 
 const sidebarMenu = document.querySelector(".sidebar-menu");
@@ -24,7 +24,7 @@ function displayTodos(todoArray) {
     });
 }
 
-function refreshMainContaent(projectName, todoArray) {
+function refreshMainContent(projectName, todoArray) {
     mainContent.textContent = "";
     mainContent.appendChild(loadMainTemplate(projectName));
 
@@ -39,7 +39,7 @@ function refreshPojects() {
     allProjects.forEach((project) => {
         if(project.name === "Inbox") return;
 
-        const projectCard = getProjectsLink(project.name);
+        const projectCard = createProjectMenuItem(project.name);
 
         projectWrapper.appendChild(projectCard);
     })
@@ -47,7 +47,7 @@ function refreshPojects() {
 
 // Change page content by sidebar nav
 export function setupUI() {
-    // Switch sidebar menus
+    //--- Switch sidebar menus ---
     sidebarMenu.addEventListener("click", function (event) {
         const clickedItem = event.target.closest(".menu-item");
 
@@ -63,7 +63,10 @@ export function setupUI() {
 
         clickedItem.classList.add("active");
         const activeIcon = clickedItem.querySelector(".material-symbols-outlined");
-        if (activeIcon) activeIcon.classList.add("filled");
+
+        if(activeIcon.textContent !== "delete") {
+            if (activeIcon) activeIcon.classList.add("filled");
+        }
 
         let tasksToRender = [];
 
@@ -82,7 +85,7 @@ export function setupUI() {
             }
         }
 
-        refreshMainContaent(itemName, tasksToRender);
+        refreshMainContent(itemName, tasksToRender);
     });
 
     // Mark todos as complete
@@ -96,7 +99,7 @@ export function setupUI() {
             appController.toggleTodoStatus(taskTitle, currentProject);
 
             const todos = appController.getSpecificProject(currentProject).todos;
-            refreshMainContaent(currentProject, todos);
+            refreshMainContent(currentProject, todos);
         }
     });
 
@@ -129,7 +132,7 @@ export function setupUI() {
                 sidebarMenu.querySelector(".menu-item.active").dataset.name;
             if (currentProject === project) {
                 const todos = appController.getSpecificProject(currentProject).todos;
-                refreshMainContaent(project, todos);
+                refreshMainContent(project, todos);
             }
         });
     });
@@ -154,4 +157,22 @@ export function setupUI() {
             projectInputField.remove();
         });
     });
+
+    // --- Delete project ---
+    projectWrapper.addEventListener("click", (event) => {
+        if(event.target.closest(".delete-project-btn")) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const targetProject = event.target.closest(".menu-item");
+            const targetProjectName = targetProject.dataset.name;
+
+            if(targetProject.classList.contains("active")) {
+                const inbox = sidebarMenu.querySelector('.menu-item[data-name="Inbox"]')
+                inbox.click();
+            }
+            appController.deleteProject(targetProjectName);
+            refreshPojects();
+        }
+    })
 }
