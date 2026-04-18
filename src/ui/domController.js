@@ -85,7 +85,7 @@ export function setupUI() {
 
             appController.createNewTodo(title, desc, date, priority, project);
 
-            const currentProject = sidebarMenu.querySelector('.menu-item.active');
+            const currentProject = sidebarMenu.querySelector('.menu-item.active').dataset.name;
             if(currentProject === project) {
                 refreshMainContaent(project);
             }
