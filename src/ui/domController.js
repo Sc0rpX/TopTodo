@@ -160,7 +160,7 @@ export function setupUI() {
 
     // --- Delete project ---
     projectWrapper.addEventListener("click", (event) => {
-        if(event.target.closest(".delete-project-btn")) {
+        if(event.target.closest(".delete-btn")) {
             event.preventDefault();
             event.stopPropagation();
 

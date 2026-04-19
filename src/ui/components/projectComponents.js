@@ -19,7 +19,7 @@ export function createProjectMenuItem(projectName) {
     nameSpan.textContent = projectName;
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'delete-project-btn';
+    deleteBtn.className = 'delete-btn';
 
     const iconSpan = document.createElement('span');
     iconSpan.className = 'material-symbols-outlined';
