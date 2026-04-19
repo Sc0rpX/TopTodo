@@ -11,6 +11,7 @@ const sidebarMenu = document.querySelector(".sidebar-menu");
 const mainContent = document.querySelector(".main-content");
 const projectWrapper = sidebarMenu.querySelector(".project-wrapper");
 
+// Function to create task card from given task array and display it in the main content section
 function displayTodos(todoArray) {
     const taskList = document.querySelector(".task-list");
 
@@ -24,6 +25,7 @@ function displayTodos(todoArray) {
     });
 }
 
+// Function to refresh the main content of the ui
 function refreshMainContent(projectName, todoArray) {
     mainContent.textContent = "";
     mainContent.appendChild(loadMainTemplate(projectName));
@@ -32,6 +34,7 @@ function refreshMainContent(projectName, todoArray) {
     displayTodos(todoArray);
 }
 
+// Function to refresh the project section of sidebar
 function refreshPojects() {
     projectWrapper.textContent = "";
 
@@ -88,18 +91,31 @@ export function setupUI() {
         refreshMainContent(itemName, tasksToRender);
     });
 
-    // Mark todos as complete
     mainContent.addEventListener("click", function (event) {
+        const currentProjectName = sidebarMenu.querySelector(".active").dataset.name;
+
+        // Mark todos as complete
         if (event.target.classList.contains("checkbox-container")) {
             const taskCard = event.target.closest(".task-card");
             const taskTitle = taskCard.dataset.title;
             console.log(taskTitle);
-            const currentProject = sidebarMenu.querySelector(".active").dataset.name;
 
-            appController.toggleTodoStatus(taskTitle, currentProject);
+            appController.toggleTodoStatus(taskTitle, currentProjectName);
 
-            const todos = appController.getSpecificProject(currentProject).todos;
-            refreshMainContent(currentProject, todos);
+            const todos = appController.getSpecificProject(currentProjectName).todos;
+            refreshMainContent(currentProjectName, todos);
+        }
+
+        if(event.target.closest(".delete-btn")) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            const targetTaskCard = event.target.closest(".task-card");
+            const targetTaskTitle = targetTaskCard.dataset.title;
+
+            appController.deleteTodo(targetTaskTitle, currentProjectName);
+
+            refreshMainContent(currentProjectName, appController.getSpecificProject(currentProjectName).todos);
         }
     });
 
