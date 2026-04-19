@@ -5,6 +5,7 @@ export default function createTaskCard(todo) {
     const taskCard = document.createElement('div');
     taskCard.className = 'task-card';
     taskCard.dataset.title = todo.title;
+    taskCard.dataset.project = todo.projectName;
 
     if(todo.completed) {
         taskCard.classList.add('completed');

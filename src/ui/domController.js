@@ -48,6 +48,17 @@ function refreshPojects() {
     })
 }
 
+// It figures out which tasks to show based on the active sidebar tab
+function getTasksForCurrentView(viewName) {
+    if (viewName === "Today") return appController.getTasksForToday();
+    if (viewName === "Tomorrow") return appController.getTasksForTomorrow();
+    if (viewName === "This week") return appController.getTasksForThisWeek();
+    
+    // If it's not a time filter, it must be a real project
+    const project = appController.getSpecificProject(viewName);
+    return project.todos;
+}
+
 // Change page content by sidebar nav
 export function setupUI() {
     //--- Switch sidebar menus ---
@@ -57,6 +68,7 @@ export function setupUI() {
         if (!clickedItem) return;
         event.preventDefault();
 
+        // Remove active class and filled class from previous menu item
         const allItems = sidebarMenu.querySelectorAll(".menu-item");
         allItems.forEach((item) => {
             item.classList.remove("active");
@@ -71,51 +83,41 @@ export function setupUI() {
             if (activeIcon) activeIcon.classList.add("filled");
         }
 
-        let tasksToRender = [];
-
         const itemName = clickedItem.dataset.name;
+        
+        let tasksToDisplay = getTasksForCurrentView(itemName);
 
-        if (itemName === "Today") {
-            tasksToRender = appController.getTasksForToday();
-        } else if (itemName === "Tomorrow") {
-            tasksToRender = appController.getTasksForTomorrow();
-        } else if (itemName === "This week") {
-            tasksToRender = appController.getTasksForThisWeek();
-        } else {
-            const project = appController.getSpecificProject(itemName);
-            if (project) {
-                tasksToRender = project.todos;
-            }
-        }
-
-        refreshMainContent(itemName, tasksToRender);
+        refreshMainContent(itemName, tasksToDisplay);
     });
 
     mainContent.addEventListener("click", function (event) {
-        const currentProjectName = sidebarMenu.querySelector(".active").dataset.name;
+        const currentTabName = sidebarMenu.querySelector(".active").dataset.name;
 
-        // Mark todos as complete
+        // --- Mark todos as complete ---
         if (event.target.classList.contains("checkbox-container")) {
             const taskCard = event.target.closest(".task-card");
             const taskTitle = taskCard.dataset.title;
-            console.log(taskTitle);
+            const realProjectName = taskCard.dataset.project;
 
-            appController.toggleTodoStatus(taskTitle, currentProjectName);
+            appController.toggleTodoStatus(taskTitle, realProjectName);
 
-            const todos = appController.getSpecificProject(currentProjectName).todos;
-            refreshMainContent(currentProjectName, todos);
+            const tasksToDisplay = getTasksForCurrentView(currentTabName);
+            refreshMainContent(currentTabName, tasksToDisplay);
         }
 
+        // --- Delete task ---
         if(event.target.closest(".delete-btn")) {
             event.preventDefault();
             event.stopPropagation();
 
             const targetTaskCard = event.target.closest(".task-card");
             const targetTaskTitle = targetTaskCard.dataset.title;
+            const realProjectName = targetTaskCard.dataset.project;
 
-            appController.deleteTodo(targetTaskTitle, currentProjectName);
+            appController.deleteTodo(targetTaskTitle, realProjectName);
 
-            refreshMainContent(currentProjectName, appController.getSpecificProject(currentProjectName).todos);
+            const tasksToDisplay = getTasksForCurrentView(currentTabName);
+            refreshMainContent(currentTabName, tasksToDisplay);
         }
     });
 

@@ -44,7 +44,7 @@ export function createNewTodo(
     priority,
     projectName = "Inbox",
 ) {
-    const newTodo = new Todo(title, des, dueDate, priority);
+    const newTodo = new Todo(title, des, dueDate, priority, projectName);
 
     const targetProject = getSpecificProject(projectName);
 
