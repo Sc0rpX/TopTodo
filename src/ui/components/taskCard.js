@@ -73,9 +73,19 @@ export default function createTaskCard(todo) {
     priorityBadge.className = `badge badge-${todo.priority.toLowerCase()}`;
     priorityBadge.textContent = todo.priority;
 
+    const deleteBtn = document.createElement("button");
+    deleteBtn.className = "delete-btn";
+
+    const deleteIcon = document.createElement("span");
+    deleteIcon.className = "material-symbols-outlined";
+    deleteIcon.textContent = "delete";
+
+    deleteBtn.appendChild(deleteIcon);
+
     // Append badges to meta section
     taskMeta.appendChild(timeBadge);
     taskMeta.appendChild(priorityBadge);
+    taskMeta.appendChild(deleteBtn);
 
     // 4. Assemble the final card
     taskCard.appendChild(taskInfo);

@@ -190,6 +190,10 @@ h1 {
   opacity: 0;
 }
 
+.task-card .delete-btn {
+  opacity: 1;
+}
+
 .menu-item:hover .delete-btn {
   opacity: 1;
 }
