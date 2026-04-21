@@ -36,7 +36,7 @@ function refreshMainContent(projectName, todoArray) {
 }
 
 // Function to refresh the project section of sidebar
-function refreshPojects() {
+export function refreshPojects() {
     projectWrapper.textContent = "";
 
     const allProjects = appController.getProjects();
