@@ -2,7 +2,7 @@
   "name": "toptodo",
   "version": "1.0.0",
   "description": "A simple Todo list app build with html, css and vanilla javascript and bundled with webpack.",
-  "homepage": "https://github.com/Sc0rpX/TopTodo#readme",
+  "homepage": "https://github.com/Sc0rpX/TopTodo",
   "bugs": {
     "url": "https://github.com/Sc0rpX/TopTodo/issues"
   },
@@ -17,10 +17,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "css-loader": "^7.1.4",
+    "gh-pages": "^6.3.0",
     "html-webpack-plugin": "^5.6.6",
     "style-loader": "^4.0.0",
     "webpack": "^5.106.1",
