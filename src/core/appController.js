@@ -1,13 +1,21 @@
 import Todo from "../models/todo.js";
 import Project from "../models/project.js";
-import { isToday, isTomorrow, isThisWeek, parseISO } from 'date-fns';
+import { isToday, isTomorrow, isThisWeek, parseISO, format } from 'date-fns';
+import * as storage from "./storage.js";
 
 // Project holder
-let allProjects = [];
+let allProjects = storage.loadProjects();
 
-// Initial inbox
-let inbox = new Project("Inbox");
-allProjects.push(inbox);
+if(!allProjects) {
+    allProjects = [];
+
+    // Initial inbox
+    let inbox = new Project("Inbox");
+    allProjects.push(inbox);
+
+    // Welcome task
+    createNewTodo("Welcome to your new Todo App!", "Get started by adding a task.", format(new Date(), "yyyy-MM-dd"), "High", "Inbox");
+}
 
 export function getProjects() {
     return allProjects;
@@ -20,6 +28,8 @@ export function getSpecificProject(projectName) {
 export function createNewProject(name) {
     const newProject = new Project(name);
     allProjects.push(newProject);
+
+    storage.saveProjects(allProjects);
 }
 
 export function deleteProject(projectName) {
@@ -35,6 +45,8 @@ export function deleteProject(projectName) {
     } else {
         console.error(`Error: Project "${projectName}" not found.`);
     }
+
+    storage.saveProjects(allProjects);
 }
 
 export function createNewTodo(
@@ -53,6 +65,8 @@ export function createNewTodo(
     } else {
         console.error(`Error: Project "${projectName}" not found.`);
     }
+
+    storage.saveProjects(allProjects);
 }
 
 export function deleteTodo(todoTitle, projectName) {
@@ -67,6 +81,8 @@ export function deleteTodo(todoTitle, projectName) {
     } else {
         console.error(`Error: "${projectName}" project not found.`);
     }
+
+    storage.saveProjects(allProjects);
 }
 
 export function toggleTodoStatus(todoTitle, projectName) {
@@ -85,6 +101,8 @@ export function toggleTodoStatus(todoTitle, projectName) {
     } else {
         console.error(`Error: "${projectName}" project not found.`);
     }
+
+    storage.saveProjects(allProjects);
 }
 
 

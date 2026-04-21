@@ -1,11 +1,7 @@
 import './styles/style.css';
 import * as appController from './core/appController.js';
 import { setupUI } from './ui/domController.js';
-
-window.appController = appController;
-
-appController.createNewTodo("Wash the car", "Use the good wax", "2026-04-20", "High");
-appController.createNewTodo("Buy groceries", "Milk and eggs", "2026-04-15", "Medium");
+import { saveProjects, loadProjects } from './core/storage.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     setupUI();
