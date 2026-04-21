@@ -23,6 +23,10 @@ export function loadProjects() {
         rawProject.todos.forEach(rawTodo => {
             const newTodo = new Todo(rawTodo.title, rawTodo.description, rawTodo.dueDate, rawTodo.priority, rawTodo.projectName);
 
+            if(rawTodo.completed) {
+                newTodo.completed = true;
+            }
+
             newProject.todos.push(newTodo);
         })
 
