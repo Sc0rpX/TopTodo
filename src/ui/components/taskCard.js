@@ -54,10 +54,17 @@ export default function createTaskCard(todo) {
     timeBadge.className = 'badge badge-time';
 
     if(todo.completed) {
+        if(timeBadge.classList.contains("no-due-date")) {
+            timeBadge.classList.remove("no-due-date");
+        }
         timeBadge.textContent = 'Completed'
     }
     else{
-        if(isToday(parseISO(todo.dueDate))) {
+        if(!todo.dueDate) {
+            timeBadge.textContent = "No Due Date";
+            timeBadge.classList.add("no-due-date");
+        }
+        else if(isToday(parseISO(todo.dueDate))) {
             timeBadge.textContent = "Today";
         }
         else if(isTomorrow(parseISO(todo.dueDate))) {

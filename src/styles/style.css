@@ -327,6 +327,11 @@ h1 {
   color: #454652;
 }
 
+.badge-time.no-due-date {
+  background-color: #fff9cf;
+  color: #cbb61c;
+}
+
 .badge-high {
   background-color: #ffdad6;
   color: #ba1a1a;

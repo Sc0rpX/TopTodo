@@ -112,6 +112,8 @@ export function getTasksForToday() {
 
     allProjects.forEach(project => {
         project.todos.forEach(task => {
+            if(!task.dueDate) return;
+
             if(isToday(parseISO(task.dueDate))) {
                 tasks.push(task);
             }
@@ -126,6 +128,8 @@ export function getTasksForTomorrow() {
 
     allProjects.forEach(project => {
         project.todos.forEach(task => {
+            if(!task.dueDate) return;
+
             if(isTomorrow(parseISO(task.dueDate))) {
                 tasks.push(task);
             }
@@ -140,6 +144,8 @@ export function getTasksForThisWeek() {
 
     allProjects.forEach(project => {
         project.todos.forEach(task => {
+            if(!task.dueDate) return;
+            
             if(isThisWeek(parseISO(task.dueDate))) {
                 tasks.push(task);
             }
