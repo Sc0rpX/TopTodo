@@ -199,6 +199,10 @@ export function setupUI() {
         // Input taker
         projectInputField.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
+                const inputProjectName = projectInputField.querySelector("#project-input");
+
+                if(!inputProjectName) return;
+                
                 appController.createNewProject(projectInputField.value);
                 refreshPojects();
             }
