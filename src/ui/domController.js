@@ -60,7 +60,8 @@ function getTasksForCurrentView(viewName) {
     return project.todos;
 }
 
-// Change page content by sidebar nav
+
+
 export function setupUI() {
     //--- Switch sidebar menus ---
     sidebarMenu.addEventListener("click", function (event) {
@@ -167,6 +168,9 @@ export function setupUI() {
         const createTaskBtn = newTaskDialog.querySelector(".btn-submit");
         createTaskBtn.addEventListener("click", () => {
             const title = newTaskDialog.querySelector("#task-title").value;
+
+            if(!title) return;
+
             const desc = newTaskDialog.querySelector("#task-desc").value;
             const date = newTaskDialog.querySelector("#task-date").value;
             const priority = newTaskDialog.querySelector(

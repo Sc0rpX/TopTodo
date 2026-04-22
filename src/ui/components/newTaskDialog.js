@@ -43,6 +43,7 @@ export default function getNewTaskDialog() {
     titleInput.className = "form-control";
     titleInput.id = "task-title"
     titleInput.type = "text";
+    titleInput.required = true;
     titleInput.placeholder = "What needs to be done?";
     titleInput.maxLength = 100;
 
@@ -187,6 +188,8 @@ export default function getNewTaskDialog() {
     btnCancel.formMethod = "dialog";
     btnCancel.className = "btn-cancel";
     btnCancel.textContent = "Cancel";
+
+    btnCancel.formNoValidate = true;
 
     const btnSubmit = document.createElement("button");
     btnSubmit.type = "submit";
